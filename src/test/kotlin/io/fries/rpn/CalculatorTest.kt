@@ -1,6 +1,9 @@
 package io.fries.rpn
 
-import io.fries.rpn.operations.*
+import io.fries.rpn.operations.Addition
+import io.fries.rpn.operations.Division
+import io.fries.rpn.operations.Multiplication
+import io.fries.rpn.operations.Subtraction
 import org.assertj.core.api.Assertions.assertThat
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
@@ -9,12 +12,12 @@ object CalculatorTest : Spek({
 
     describe("Reverse Polish Notation Calculator") {
         val calculator by memoized {
-            Calculator(OperationRepository(mapOf(
-                    "+" to Addition(),
-                    "-" to Subtraction(),
-                    "*" to Multiplication(),
-                    "/" to Division()
-            )))
+            Calculator {
+                register("+", Addition())
+                register("-", Subtraction())
+                register("*", Multiplication())
+                register("/", Division())
+            }
         }
 
         describe("addition") {

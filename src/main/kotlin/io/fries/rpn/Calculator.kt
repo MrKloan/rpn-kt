@@ -3,7 +3,9 @@ package io.fries.rpn
 import io.fries.rpn.operations.OperationRepository
 import java.util.*
 
-class Calculator(private val operationRepository: OperationRepository) {
+class Calculator(initializer: OperationRepository.Builder.() -> Unit) {
+
+    private val operationRepository: OperationRepository = OperationRepository.Builder().apply(initializer).build()
 
     fun compute(expression: String): Double {
         val tokens = expression
