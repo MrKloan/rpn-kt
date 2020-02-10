@@ -54,5 +54,20 @@ object CalculatorTest : Spek({
                 assertThat(calculator.compute("1 2 3 * *")).isEqualTo(6.0)
             }
         }
+
+        describe("division") {
+
+            it("should divide two values") {
+                assertThat(calculator.compute("6 3 /")).isEqualTo(2.0)
+            }
+
+            it("should divide multiple values") {
+                assertThat(calculator.compute("10 2 / 2 /")).isEqualTo(2.5)
+            }
+
+            it("should divide multiple values with stacked operators") {
+                assertThat(calculator.compute("5 4 2 / /")).isEqualTo(2.5)
+            }
+        }
     }
 })

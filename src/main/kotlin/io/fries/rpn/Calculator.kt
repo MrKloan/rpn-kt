@@ -19,6 +19,11 @@ class Calculator {
                 val secondOperand = stack.pop()
                 val firstOperand = stack.pop()
                 stack.push(firstOperand * secondOperand)
+            },
+            "/" to { stack: Stack<Double> ->
+                val secondOperand = stack.pop()
+                val firstOperand = stack.pop()
+                stack.push(firstOperand / secondOperand)
             }
     )
 
