@@ -5,14 +5,15 @@ import java.util.*
 class Calculator {
 
     fun compute(expression: String): Double {
-        val tokens = expression.split(" ")
+        val tokens = expression
+                .split(" ")
+                .map(::Token)
+
         val stack = Stack<Double>()
 
         tokens.forEach { token ->
-            val doubleValue = token.toDoubleOrNull()
-
-            if (doubleValue != null) {
-                stack.push(doubleValue)
+            if (token.isDouble()) {
+                stack.push(token.asDouble())
             } else {
                 stack.push(stack.pop() + stack.pop())
             }
