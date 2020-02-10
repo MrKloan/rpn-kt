@@ -1,6 +1,7 @@
 package io.fries.rpn
 
 import io.fries.rpn.operations.Addition
+import io.fries.rpn.operations.Division
 import io.fries.rpn.operations.Multiplication
 import io.fries.rpn.operations.Subtraction
 import java.util.*
@@ -11,11 +12,7 @@ class Calculator {
             "+" to { stack: Stack<Double> -> Addition().compute(stack) },
             "-" to { stack: Stack<Double> -> Subtraction().compute(stack) },
             "*" to { stack: Stack<Double> -> Multiplication().compute(stack) },
-            "/" to { stack: Stack<Double> ->
-                val secondOperand = stack.pop()
-                val firstOperand = stack.pop()
-                stack.push(firstOperand / secondOperand)
-            }
+            "/" to { stack: Stack<Double> -> Division().compute(stack) }
     )
 
     fun compute(expression: String): Double {
