@@ -1,19 +1,9 @@
 package io.fries.rpn
 
-import io.fries.rpn.operations.Addition
-import io.fries.rpn.operations.Division
-import io.fries.rpn.operations.Multiplication
-import io.fries.rpn.operations.Subtraction
+import io.fries.rpn.operations.OperationRepository
 import java.util.*
 
-class Calculator {
-
-    private val operations = mapOf(
-            "+" to Addition(),
-            "-" to Subtraction(),
-            "*" to Multiplication(),
-            "/" to Division()
-    )
+class Calculator(private val operationRepository: OperationRepository) {
 
     fun compute(expression: String): Double {
         val tokens = expression
@@ -26,7 +16,9 @@ class Calculator {
             if (token.isDouble()) {
                 stack.push(token.asDouble())
             } else {
-                operations[token.asString()]?.compute(stack)
+                operationRepository
+                        .find(token.asString())
+                        .compute(stack)
             }
         }
 
