@@ -13,7 +13,15 @@ object CalculatorTest : Spek({
         describe("addition") {
 
             it("should add two values") {
-                assertThat(calculator.compute("1 2 +")).isEqualTo(3)
+                assertThat(calculator.compute("1 2 +")).isEqualTo(3.0)
+            }
+
+            it("should add multiple values") {
+                assertThat(calculator.compute("1 2 + 3 +")).isEqualTo(6.0)
+            }
+
+            it("should add multiple values with stacked operators") {
+                assertThat(calculator.compute("1 2 3 + +")).isEqualTo(6.0)
             }
         }
     }
