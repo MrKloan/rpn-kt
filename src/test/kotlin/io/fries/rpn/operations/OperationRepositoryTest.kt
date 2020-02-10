@@ -25,4 +25,14 @@ object OperationRepositoryTest : Spek({
                     .withNoCause()
         }
     }
+
+    describe("Operation Repository builder") {
+        val builder by memoized { OperationRepository.Builder() }
+
+        it("should trim the registered operator") {
+            builder.register(" NOOP   ", NoopOperation)
+
+            assertThat(builder.build().find("NOOP")).isEqualTo(NoopOperation)
+        }
+    }
 })

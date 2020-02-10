@@ -11,7 +11,7 @@ class OperationRepository(val operations: Map<String, Operation>) {
         private val operations: MutableMap<String, Operation> = mutableMapOf()
 
         fun register(operator: String, operation: Operation) = apply {
-            operations[operator] = operation
+            operations[operator.trim()] = operation
         }
 
         fun build(): OperationRepository {
