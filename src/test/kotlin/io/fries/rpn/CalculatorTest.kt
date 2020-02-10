@@ -24,5 +24,20 @@ object CalculatorTest : Spek({
                 assertThat(calculator.compute("1 2 3 + +")).isEqualTo(6.0)
             }
         }
+
+        describe("subtraction") {
+
+            it("should add two values") {
+                assertThat(calculator.compute("2 1 -")).isEqualTo(1.0)
+            }
+
+            it("should add multiple values") {
+                assertThat(calculator.compute("5 1 - 2 -")).isEqualTo(2.0)
+            }
+
+            it("should add multiple values with stacked operators") {
+                assertThat(calculator.compute("5 1 2 - -")).isEqualTo(6.0)
+            }
+        }
     }
 })

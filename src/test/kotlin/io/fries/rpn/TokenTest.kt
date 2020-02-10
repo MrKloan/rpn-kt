@@ -19,5 +19,9 @@ object TokenTest : Spek({
         it("should convert to double") {
             assertThat(Token("3").asDouble()).isEqualTo(3.0)
         }
+
+        it("should convert to string") {
+            assertThat(Token("value").asString()).isEqualTo("value")
+        }
     }
 })

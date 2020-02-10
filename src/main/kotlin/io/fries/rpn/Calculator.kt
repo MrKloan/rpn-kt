@@ -15,7 +15,15 @@ class Calculator {
             if (token.isDouble()) {
                 stack.push(token.asDouble())
             } else {
-                stack.push(stack.pop() + stack.pop())
+                if (token.asString() == "+") {
+                    val secondOperand = stack.pop()
+                    val firstOperand = stack.pop()
+                    stack.push(firstOperand + secondOperand)
+                } else if (token.asString() == "-") {
+                    val secondOperand = stack.pop()
+                    val firstOperand = stack.pop()
+                    stack.push(firstOperand - secondOperand)
+                }
             }
         }
 
