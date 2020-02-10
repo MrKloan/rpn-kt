@@ -9,10 +9,10 @@ import java.util.*
 class Calculator {
 
     private val operations = mapOf(
-            "+" to { stack: Stack<Double> -> Addition().compute(stack) },
-            "-" to { stack: Stack<Double> -> Subtraction().compute(stack) },
-            "*" to { stack: Stack<Double> -> Multiplication().compute(stack) },
-            "/" to { stack: Stack<Double> -> Division().compute(stack) }
+            "+" to Addition(),
+            "-" to Subtraction(),
+            "*" to Multiplication(),
+            "/" to Division()
     )
 
     fun compute(expression: String): Double {
@@ -26,7 +26,7 @@ class Calculator {
             if (token.isDouble()) {
                 stack.push(token.asDouble())
             } else {
-                operations[token.asString()]?.invoke(stack)
+                operations[token.asString()]?.compute(stack)
             }
         }
 
