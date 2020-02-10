@@ -6,7 +6,7 @@ import org.spekframework.spek2.style.specification.describe
 
 object TokenTest : Spek({
 
-    describe("a Token") {
+    describe("Token") {
 
         it("should be a double") {
             assertThat(Token("3").isDouble()).isTrue()

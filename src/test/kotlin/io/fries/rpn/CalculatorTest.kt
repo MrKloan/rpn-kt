@@ -6,7 +6,7 @@ import org.spekframework.spek2.style.specification.describe
 
 object CalculatorTest : Spek({
 
-    describe("a Reverse Polish Notation Calculator") {
+    describe("Reverse Polish Notation Calculator") {
         val calculator by memoized { Calculator() }
 
         describe("addition") {
