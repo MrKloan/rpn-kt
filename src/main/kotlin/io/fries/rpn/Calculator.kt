@@ -4,6 +4,19 @@ import java.util.*
 
 class Calculator {
 
+    private val operations = mapOf(
+            "+" to { stack: Stack<Double> ->
+                val secondOperand = stack.pop()
+                val firstOperand = stack.pop()
+                stack.push(firstOperand + secondOperand)
+            },
+            "-" to { stack: Stack<Double> ->
+                val secondOperand = stack.pop()
+                val firstOperand = stack.pop()
+                stack.push(firstOperand - secondOperand)
+            }
+    )
+
     fun compute(expression: String): Double {
         val tokens = expression
                 .split(" ")
@@ -15,15 +28,7 @@ class Calculator {
             if (token.isDouble()) {
                 stack.push(token.asDouble())
             } else {
-                if (token.asString() == "+") {
-                    val secondOperand = stack.pop()
-                    val firstOperand = stack.pop()
-                    stack.push(firstOperand + secondOperand)
-                } else if (token.asString() == "-") {
-                    val secondOperand = stack.pop()
-                    val firstOperand = stack.pop()
-                    stack.push(firstOperand - secondOperand)
-                }
+                operations[token.asString()]?.invoke(stack)
             }
         }
 
