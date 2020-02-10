@@ -1,15 +1,12 @@
 package io.fries.rpn
 
+import io.fries.rpn.operations.Addition
 import java.util.*
 
 class Calculator {
 
     private val operations = mapOf(
-            "+" to { stack: Stack<Double> ->
-                val secondOperand = stack.pop()
-                val firstOperand = stack.pop()
-                stack.push(firstOperand + secondOperand)
-            },
+            "+" to { stack: Stack<Double> -> Addition().compute(stack) },
             "-" to { stack: Stack<Double> ->
                 val secondOperand = stack.pop()
                 val firstOperand = stack.pop()

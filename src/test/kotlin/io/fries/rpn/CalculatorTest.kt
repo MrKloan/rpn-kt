@@ -4,7 +4,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 
-
 object CalculatorTest : Spek({
 
     describe("a Reverse Polish Notation Calculator") {
