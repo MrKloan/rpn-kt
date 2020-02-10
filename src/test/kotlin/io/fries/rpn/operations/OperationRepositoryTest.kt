@@ -24,6 +24,13 @@ object OperationRepositoryTest : Spek({
                     .withMessage("Unknown operator: UNKNOWN")
                     .withNoCause()
         }
+
+        it("should throw when the operation repository is empty") {
+            assertThatExceptionOfType(IllegalArgumentException::class.java)
+                    .isThrownBy { OperationRepository(mapOf()) }
+                    .withMessage("Operation repository cannot be empty")
+                    .withNoCause()
+        }
     }
 
     describe("Operation Repository builder") {
