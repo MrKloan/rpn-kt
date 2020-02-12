@@ -1,5 +1,7 @@
 package io.fries.rpn.operations
 
+import java.util.*
+
 class OperationRepository(val operations: Map<String, Operation>) {
 
     init {
@@ -19,6 +21,15 @@ class OperationRepository(val operations: Map<String, Operation>) {
         fun register(operator: String, operation: Operation) = apply {
             operations[operator.trim()] = operation
         }
+
+        fun register(operator: String, operation: (Stack<Double>) -> Unit) = register(
+                operator,
+                object : Operation {
+                    override fun compute(stack: Stack<Double>) {
+                        operation(stack)
+                    }
+                }
+        )
 
         fun build(): OperationRepository {
             return OperationRepository(operations)

@@ -7,6 +7,7 @@ import io.fries.rpn.operations.Subtraction
 import org.assertj.core.api.Assertions.assertThat
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
+import kotlin.math.sqrt
 
 object CalculatorTest : Spek({
 
@@ -17,10 +18,11 @@ object CalculatorTest : Spek({
                 register("-", Subtraction())
                 register("*", Multiplication())
                 register("/", Division())
+                register("SQRT") { it.push(sqrt(it.pop())) }
             }
         }
 
-        describe("addition") {
+        describe("Addition") {
 
             it("should add two values") {
                 assertThat(calculator.compute("1 2 +")).isEqualTo(3.0)
@@ -35,7 +37,7 @@ object CalculatorTest : Spek({
             }
         }
 
-        describe("subtraction") {
+        describe("Subtraction") {
 
             it("should subtract two values") {
                 assertThat(calculator.compute("2 1 -")).isEqualTo(1.0)
@@ -50,7 +52,7 @@ object CalculatorTest : Spek({
             }
         }
 
-        describe("multiplication") {
+        describe("Multiplication") {
 
             it("should multiply two values") {
                 assertThat(calculator.compute("1 2 *")).isEqualTo(2.0)
@@ -65,7 +67,7 @@ object CalculatorTest : Spek({
             }
         }
 
-        describe("division") {
+        describe("Division") {
 
             it("should divide two values") {
                 assertThat(calculator.compute("6 3 /")).isEqualTo(2.0)
@@ -77,6 +79,13 @@ object CalculatorTest : Spek({
 
             it("should divide multiple values with stacked operators") {
                 assertThat(calculator.compute("5 4 2 / /")).isEqualTo(2.5)
+            }
+        }
+
+        describe("Square Root") {
+
+            it("should compute the square root of a value") {
+                assertThat(calculator.compute("9 SQRT")).isEqualTo(3.0)
             }
         }
     }
