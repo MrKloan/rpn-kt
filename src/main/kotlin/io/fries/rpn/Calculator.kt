@@ -8,22 +8,29 @@ class Calculator(initializer: OperationRepository.Builder.() -> Unit) {
     private val operationRepository: OperationRepository = OperationRepository.Builder().apply(initializer).build()
 
     fun compute(expression: String): Double {
-        val tokens = expression
-                .split(" ")
-                .map(::Token)
-
         val stack = Stack<Double>()
 
-        tokens.forEach { token ->
-            if (token.isDouble()) {
-                stack.push(token.asDouble())
-            } else {
-                operationRepository
-                        .find(token.asString())
-                        .compute(stack)
-            }
+        tokensOf(expression).forEach {
+            compute(it, stack)
         }
 
         return stack.pop()
+    }
+
+    private fun tokensOf(expression: String): List<Token> {
+        return expression
+                .split(" ")
+                .map(::Token)
+    }
+
+    private fun compute(token: Token, stack: Stack<Double>) {
+        if (token.isDouble()) {
+            stack.push(token.asDouble())
+            return
+        }
+
+        operationRepository
+                .find(token.asString())
+                .compute(stack)
     }
 }
